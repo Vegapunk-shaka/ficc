@@ -19,9 +19,9 @@ from bot import (
     resolution,
     audio_b,
     preset,
-    codec
-    #name,
-    #size
+    codec,
+    name,
+    size
     
 
 )
@@ -49,7 +49,7 @@ crf.append("28")
 codec.append("libx264")
 resolution.append("1920x1080")
 preset.append("veryfast")
-audio_b.append("40k")
+audio_b.append("48k")
 #name.append("Free Edu Care")
 #size.append("17")
 # 🤣

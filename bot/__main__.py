@@ -120,7 +120,7 @@ if __name__ == "__main__" :
     async def changer(app, message):
         if message.from_user.id in AUTH_USERS:
             r = message.text.split(" ", maxsplit=1)[1]
-            OUT = f"I will be using : {r} resolution"
+            OUT = f"<blockquote>I will be using : {r} resolution</blockquote>"
             resolution.insert(0, f"{r}")
             await message.reply_text(OUT)
         else:
@@ -130,7 +130,7 @@ if __name__ == "__main__" :
     async def changesi(app, message):
         if message.from_user.id in AUTH_USERS:
             si = message.text.split(" ", maxsplit=1)[1]
-            OUT = f"I will be using : {si} watermark size"
+            OUT = f"<blockquote>I will be using : {si} watermark size</blockquote>"
             size.insert(0, f"{si}")
             await message.reply_text(OUT)
         else:
@@ -140,7 +140,7 @@ if __name__ == "__main__" :
     async def changete(app, message):
         if message.from_user.id in AUTH_USERS:
             na = message.text.split(" ", maxsplit=1)[1]
-            OUT = f"I will be using : {na} watermark name"
+            OUT = f"<blockquote>I will be using : {na} watermark name</blockquote>"
             name.insert(0, f"{na}")
             await message.reply_text(OUT)
         else:
@@ -150,7 +150,7 @@ if __name__ == "__main__" :
     async def changepr(app, message):
         if message.from_user.id in AUTH_USERS:
             pop = message.text.split(" ", maxsplit=1)[1]
-            OUT = f"I will be using : {pop} preset"
+            OUT = f"<blockquote>I will be using : {pop} preset</blockquote>"
             preset.insert(0, f"{pop}")
             await message.reply_text(OUT)
         else:
@@ -161,7 +161,7 @@ if __name__ == "__main__" :
     async def changecode(app, message):
         if message.from_user.id in AUTH_USERS:
             col = message.text.split(" ", maxsplit=1)[1]
-            OUT = f"I will be using : {col} codec"
+            OUT = f"<blockquote>I will be using : {col} codec</blockquote>"
             codec.insert(0, f"{col}")
             await message.reply_text(OUT)
         else:
@@ -171,7 +171,7 @@ if __name__ == "__main__" :
     async def changea(app, message):
         if message.from_user.id in AUTH_USERS:
             aud = message.text.split(" ", maxsplit=1)[1]
-            OUT = f"I will be using : {aud} audio"
+            OUT = f"<blockquote>I will be using : {aud} audio</blockquote>"
             audio_b.insert(0, f"{aud}")
             await message.reply_text(OUT)
         else:

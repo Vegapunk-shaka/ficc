@@ -95,11 +95,11 @@ if __name__ == "__main__" :
     async def changecrf(app, message):
         if message.from_user.id in AUTH_USERS:
             cr = message.text.split(" ", maxsplit=1)[1]
-            OUT = f"I will be using : {cr} crf"
+            OUT = f"<blockquote> will be using : {cr} crf</blockquote>"
             crf.insert(0, f"{cr}")
             await message.reply_text(OUT)
         else:
-            await message.reply_text("<b>Admin Only</b> 💀")
+            await message.reply_text("<blockquote><b>Admin Only</b> 💀</blockquote>")
             
     @app.on_message(filters.incoming & filters.command(["settings", f"settings@{BOT_USERNAME}"]))
     async def settings(app, message):

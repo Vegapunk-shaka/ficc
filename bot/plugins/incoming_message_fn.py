@@ -283,7 +283,7 @@ async def incoming_compress_message_f(update):
     if duration is None or bitrate is None:
       try:
         await sent_message.edit_text(                
-          text="⚠️ Getting video meta data failed ⚠️"                
+          text="<blockquote>⚠️ Getting video meta data failed ⚠️</blockquote>"                
         )
         chat_id = LOG_CHANNEL
         utc_now = datetime.datetime.utcnow()
@@ -400,11 +400,11 @@ async def incoming_compress_message_f(update):
      # delete_downloads()
       try:
         await sent_message.edit_text(                    
-          text="⚠️ Compression failed ⚠️"               
+          text="<blockquote>⚠️ Compression failed ⚠️</blockquote>"               
         )
         chat_id = LOG_CHANNEL
         now = datetime.datetime.now()
-        await bot.send_message(chat_id, f"**Compression Failed, Bot is Free Now !!** \n\nProcess Done at `{now}`")
+        await bot.send_message(chat_id, f"<blockquote>**Compression Failed, Bot is Free Now !!** \n\nProcess Done at `{now}`</blockquote>")
         await download_start.delete()
       except:
         pass
@@ -413,7 +413,7 @@ async def incoming_compress_message_f(update):
   #  delete_downloads()
     try:
       await sent_message.edit_text(                    
-        text="⚠️ Failed Downloaded path not exist ⚠️"               
+        text="<blockquote>⚠️ Failed Downloaded path not exist ⚠️</blockquote>"               
       )
       chat_id = LOG_CHANNEL
       utc_now = datetime.datetime.utcnow()
@@ -422,7 +422,7 @@ async def incoming_compress_message_f(update):
       bst_now = utc_now + datetime.timedelta(minutes=00, hours=6)
       bst = bst_now.strftime("%d/%m/%Y, %H:%M:%S")
       now = f"\n{ist} (GMT+05:30)`\n`{bst} (GMT+06:00)"
-      await bot.send_message(chat_id, f"**Download Error, Bot is Free Now !!** \n\nProcess Done at `{now}`")
+      await bot.send_message(chat_id, f"<blockquote>**Download Error, Bot is Free Now !!** \n\nProcess Done at `{now}`</blockquote>")
       await download_start.delete()
     except:
       pass

@@ -49,12 +49,12 @@ async def progress_for_pyrogram(
         elapsed_time = TimeFormatter(milliseconds=elapsed_time)
         estimated_total_time = TimeFormatter(milliseconds=estimated_total_time)
 
-        progress = "<blockquote>[{0}{1}] \n <b>ᴘʀᴏᴄᴇssɪɴɢ:</b> {2}%</blockquote>\n".format(
+        progress = "<blockquote><code>[{0}{1}]</code>\n<b>ᴘʀᴏᴄᴇssɪɴɢ:</b> {2}%\n</blockquote>".format(
             ''.join([FINISHED_PROGRESS_STR for i in range(math.floor(percentage / 10))]),
             ''.join([UN_FINISHED_PROGRESS_STR for i in range(10 - math.floor(percentage / 10))]),
             round(percentage, 2))
 
-        tmp = progress + "<blockquote>{0} of {1}\nSpeed: {2}/s\nETA: {3}\</blockquote>".format(
+        tmp = progress + "<blockquote>{0} of {1}\nSpeed: {2}/s\nETA: {3}</blockquote>".format(
             humanbytes(current),
             humanbytes(total),
             humanbytes(speed),
@@ -87,7 +87,7 @@ def humanbytes(size):
         return ""
     power = 2**10
     n = 0
-    Dic_powerN = {0: ' ', 1: 'Ki', 2: 'Mi', 3: 'Gi', 4: 'Ti'}
+    Dic_powerN = {0: ' ', 1: 'K', 2: 'M', 3: 'G', 4: 'T'}
     while size > power:
         size /= power
         n += 1

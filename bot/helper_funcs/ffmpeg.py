@@ -72,9 +72,9 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
     if resolution[0] == "1920x1080":
         kk = re.sub(r'(HDRip)', '1080p', kk)
     
-    #out_put_file_name = kk.replace(f".{aa}", "@Anime4u_in.mkv")
+    out_put_file_name = kk.replace(f".{aa}", ".mkv")
     
-    out_put_file_name = video_file + "_compressed" + ".mkv"
+    #out_put_file_name = video_file + "_compressed" + ".mkv"
     progress = output_directory + "/" + "progress.txt"
     with open(progress, 'w') as f:
       pass
@@ -149,8 +149,8 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
             ''.join([FINISHED_PROGRESS_STR for i in range(math.floor(percentage / 10))]),
             ''.join([UN_FINISHED_PROGRESS_STR for i in range(10 - math.floor(percentage / 10))])
             )
-        stats = f'<blockquote> <b>ᴇɴᴄᴏᴅɪɴɢ ɪɴ ᴘʀᴏɢʀᴇss</b></blockquote>\n\n' \
-                f'<blockquote><b>ᴛɪᴍᴇ ʟᴇғᴛ:</b> {ETA}</blockquote>\n\n' \
+        stats = f'<blockquote> <b>ᴇɴᴄᴏᴅɪɴɢ ɪɴ ᴘʀᴏɢʀᴇss</b></blockquote>\n' \
+                f'<blockquote><b>ᴛɪᴍᴇ ʟᴇғᴛ:</b> {ETA}</blockquote>\n' \
                 f'{progress_str}\n'
         try:
           await message.edit_text(
@@ -259,4 +259,4 @@ def get_width_height(video_file):
     if metadata.has("width") and metadata.has("height"):
         return metadata.get("width"), metadata.get("height")
     else:
-        return 1920, 1080
+        return 1280, 720

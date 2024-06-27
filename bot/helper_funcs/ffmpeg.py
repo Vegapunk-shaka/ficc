@@ -84,7 +84,7 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
      ## lol 😂
     ##
     crf.append("28")
-    codec.append("libx264")
+    codec.append("libx265")
     resolution.append("1280x720")
     preset.append("ultrafast")
     audio_b.append("30k")

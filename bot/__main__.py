@@ -47,7 +47,7 @@ from bot.plugins.call_back_button_handler import button
 sudo_users = "1908235162" 
 crf.append("30")
 codec.append("libx264")
-resolution.append("1920x1080")
+resolution.append("1280x720")
 preset.append("ultrafast")
 audio_b.append("30k")
 name.append("Owner of this video is Free Edu Care")

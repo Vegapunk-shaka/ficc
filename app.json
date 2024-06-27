@@ -24,7 +24,7 @@
     },
     "TG_BOT_TOKEN": {
       "description": "Your bot token, as a string. Get this from @BotFather",
-      "value": "7406707975:AAEMdNPb6hwICsOdP9gL_ZE28TTIb8wYf7k",
+      "value": "7428439518:AAFok2y7043MS6dZlFxzXIdda7PhGlKQ3qM",
       "required": true
     },
     "APP_ID": {
@@ -39,7 +39,7 @@
     },
     "BOT_USERNAME": {
       "description": "Your Bot Username. Without `@` before Username!",
-      "value": "Zoro_four_bot",
+      "value": "ungabungabu_bot",
       "required": true
     },
     "LOG_CHANNEL": {

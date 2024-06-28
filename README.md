@@ -13,4 +13,5 @@ resolution - Your Resolution Setting
 audio - Your Audio Setting
 settings - Check Current Ffmpeg Code Settings
 ```
-![image](https://github.com/Vegapunk-shaka/ficc/assets/173505119/c553b327-da41-4aa0-bf1b-690b0e8ae76c)
+
+![image](https://github.com/Vegapunk-shaka/ficc/assets/173505119/50bb7905-4e73-4eaa-865d-728fbe618bf3)

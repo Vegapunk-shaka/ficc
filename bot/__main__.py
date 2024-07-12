@@ -51,7 +51,7 @@ resolution.append("1280x720")
 preset.append("ultrafast")
 audio_b.append("30k")
 name.append("Owner of this video is Free Edu Care")
-size.append("13")
+size.append("18")
 # 🤣
 
 

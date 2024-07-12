@@ -90,7 +90,7 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
     audio_b.append("30k")
     name.append("Owner of this video is Free Edu Care")
     size.append("13")
-    file_genertor_command = f"ffmpeg -hwaccel cuda -progress '{progress}' -i '{video_file}' -metadata 'title=Encoded by @zoro_is_robot' -c:v hevc_nvenc -crf {crf[0]} -c:s copy -pix_fmt yuv420p -s {resolution[0]} -b:v 150k  -preset {preset[0]} -metadata:s:v 'title=@zoro_is_robot' -metadata:s:a 'title=@zoro_is_robot' -metadata:s:s 'title=@zoro_is_robot' -vf 'drawtext=fontfile=font.ttf:fontsize={size[0]}:fontcolor=white:bordercolor=black@0.50:x=w-tw-10:y=10:box=1:boxcolor=black@0.5:boxborderw=6:text={name[0]}' '{out_put_file_name}' -y"
+    file_genertor_command = f"ffmpeg -progress '{progress}' -hwaccel cuda -hwaccel_output_format cuda -i '{video_file}' -metadata 'title=Encoded by @zoro_is_robot' -c:v hevc_nvenc -crf {crf[0]} -c:s copy -pix_fmt yuv420p -s {resolution[0]} -b:v 150k  -preset {preset[0]} -metadata:s:v 'title=@zoro_is_robot' -metadata:s:a 'title=@zoro_is_robot' -metadata:s:s 'title=@zoro_is_robot' -vf 'drawtext=fontfile=font.ttf:fontsize={size[0]}:fontcolor=white:bordercolor=black@0.50:x=w-tw-10:y=10:box=1:boxcolor=black@0.5:boxborderw=6:text={name[0]}' '{out_put_file_name}' -y"
     COMPRESSION_START_TIME = time.time()
     process = await asyncio.create_subprocess_shell(
           file_genertor_command,

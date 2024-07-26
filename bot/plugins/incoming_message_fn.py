@@ -214,7 +214,7 @@ async def incoming_compress_message_f(update):
       video = await bot.download_media(
         #message=update.reply_to_message,
         message=update,  
-        #file_name=saved_file_path,
+        file_name=saved_file_path,
         progress=progress_for_pyrogram,
         progress_args=(
           bot,
@@ -342,7 +342,8 @@ async def incoming_compress_message_f(update):
         text=Localisation.UPLOAD_START,                    
       )
       u_start = time.time()
-      caption = Localisation.COMPRESS_SUCCESS.replace('{}', downloaded_time, 1).replace('{}', compressed_time, 1)
+      #caption = Localisation.COMPRESS_SUCCESS.replace('{}', downloaded_time, 1).replace('{}', compressed_time, 1)
+      caption = file_name
       upload = await bot.send_video(
         chat_id=update.chat.id,
         video=o,

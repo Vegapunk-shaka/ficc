@@ -348,7 +348,7 @@ async def incoming_compress_message_f(update):
         video=o,
         caption=caption,
         #force_document=True,
-        #duration=duration,
+        duration=duration,
         thumb="thumb.jpg",
         reply_to_message_id=update.id,
         progress=progress_for_pyrogram,

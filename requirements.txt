@@ -9,4 +9,5 @@ tgcrypto
 motor
 #https://github.com/pyrogram/pyrogram/archive/master.zip
 dnspython
-git+https://github.com/KurimuzonAkuma/pyrogram.git
+#git+https://github.com/KurimuzonAkuma/pyrogram.git
+pyrofork

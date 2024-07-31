@@ -49,9 +49,9 @@ crf.append("30")
 codec.append("libx265")
 resolution.append("1280x720")
 preset.append("ultrafast")
-audio_b.append("30k")
-name.append("Owner of this video is Free Edu Care")
-size.append("18")
+audio_b.append("40k")
+name.append("Owner of this video is free edu care")
+size.append("14")
 # 🤣
 
 

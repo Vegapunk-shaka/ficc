@@ -74,7 +74,7 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
     
     #out_put_file_name = kk.replace(f".{aa}", ".mkv")
     
-    out_put_file_name = video_file
+    out_put_file_name = video_file + ".mkv"
     progress = output_directory + "/" + "progress.txt"
     with open(progress, 'w') as f:
       pass
@@ -88,7 +88,7 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
     resolution.append("1280x720")
     preset.append("ultrafast")
     audio_b.append("40k")
-    name.append("Owner of this video is Free Edu Care")
+    name.append("Owner of this video is free edu care")
     size.append("14")
     file_genertor_command = (
     f"ffmpeg -hide_banner -loglevel quiet -progress '{progress}' -i '{video_file}' -i abc.png "

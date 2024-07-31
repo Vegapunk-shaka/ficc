@@ -74,7 +74,7 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
     
     #out_put_file_name = kk.replace(f".{aa}", ".mkv")
     
-    out_put_file_name = video_file + ".mkv"
+    out_put_file_name = video_file
     progress = output_directory + "/" + "progress.txt"
     with open(progress, 'w') as f:
       pass
@@ -83,19 +83,19 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
      ## -vf eq=gamma=1.4:saturation=1.4
      ## lol 😂
     ##-hide_banner -loglevel quiet 
-    crf.append("30")
+    crf.append("28")
     codec.append("libx265")
     resolution.append("1280x720")
     preset.append("ultrafast")
-    audio_b.append("30k")
+    audio_b.append("40k")
     name.append("Owner of this video is Free Edu Care")
-    size.append("13")
+    size.append("14")
     file_genertor_command = (
     f"ffmpeg -hide_banner -loglevel quiet -progress '{progress}' -i '{video_file}' -i abc.png "
     f"-metadata 'title=Encoded by @zoro_is_robot' -c:v libx265 -map 0 -crf {crf[0]} -c:s copy -pix_fmt yuv420p "
     f"-s {resolution[0]} -b:v 150k -c:a libopus -b:a {audio_b[0]} -preset {preset[0]} "
     f"-metadata:s:v 'title=@zoro_is_robot' -metadata:s:a 'title=@zoro_is_robot' -metadata:s:s 'title=@zoro_is_robot' "
-    f"-filter_complex \"[1:v] scale=60:60 [logo]; [0:v][logo] overlay=10:10,drawtext=fontfile=font.ttf:fontsize={size[0]}:fontcolor=white:bordercolor=black@0.50:x=w-tw-10:y=10:box=1:boxcolor=black@0.5:boxborderw=6:text='{name[0]}'\" "
+    f"-filter_complex \"[1:v] scale=60:60 [logo]; [0:v][logo] overlay=10:10,drawtext=fontfile=font.ttf:fontsize={size[0]}:fontcolor=white:bordercolor=black@0.50:x=w-tw-10:y=10:box=1:boxcolor=black@0.5:boxborderw=4:text='{name[0]}'\" "
     f"'{out_put_file_name}' -y"
 )
     #file_genertor_command = f"ffmpeg -hide_banner -loglevel quiet -progress '{progress}' -y -vsync 0 -hwaccel cuda -hwaccel_output_format cuda -i '{video_file}' -c:v h264_nvenc -map 0 -crf {crf[0]} -c:s copy  -s {resolution[0]} -b:v copy -c:a copy -preset p2  '{out_put_file_name}' -y"

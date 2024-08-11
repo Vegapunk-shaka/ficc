@@ -83,7 +83,7 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
      ## -vf eq=gamma=1.4:saturation=1.4
      ## lol 😂
     ##-hide_banner -loglevel quiet 
-    crf.append("28")
+    crf.append("26")
     codec.append("libx265")
     resolution.append("1280x720")
     preset.append("ultrafast")

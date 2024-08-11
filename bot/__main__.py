@@ -45,13 +45,13 @@ from bot.plugins.status_message_fn import (
 from bot.commands import Command
 from bot.plugins.call_back_button_handler import button
 sudo_users = "1908235162" 
-crf.append("30")
+crf.append("26")
 codec.append("libx265")
 resolution.append("1280x720")
 preset.append("ultrafast")
 audio_b.append("40k")
 name.append("Owner of this video is free edu care")
-size.append("14")
+size.append("18")
 # 🤣
 
 

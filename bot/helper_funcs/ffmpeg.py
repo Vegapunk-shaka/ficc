@@ -84,7 +84,7 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
      ## lol 😂
     ##-hide_banner -loglevel quiet 
     crf.append("26")
-    codec.append("libx265")
+    codec.append("libx264")
     resolution.append("1280x720")
     preset.append("ultrafast")
     audio_b.append("40k")
@@ -92,7 +92,7 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
     size.append("18")
     file_genertor_command = (
     f"ffmpeg -hide_banner -loglevel quiet -progress '{progress}' -i '{video_file}' -i abc.png "
-    f"-metadata 'title=Encoded by @zoro_is_robot' -c:v libx265 -map 0 -crf {crf[0]} -c:s copy -pix_fmt yuv420p "
+    f"-metadata 'title=Encoded by @zoro_is_robot' -c:v libx264 -map 0 -crf {crf[0]} -c:s copy -pix_fmt yuv420p "
     f"-s {resolution[0]} -b:v 500k -c:a libopus -b:a {audio_b[0]} -preset {preset[0]} "
     f"-metadata:s:v 'title=@zoro_is_robot' -metadata:s:a 'title=@zoro_is_robot' -metadata:s:s 'title=@zoro_is_robot' "
     f"-filter_complex \"[1:v] scale=80:80 [logo]; [0:v][logo] overlay=10:10,drawtext=fontfile=font.ttf:fontsize={size[0]}:fontcolor=white:bordercolor=black@0.50:x=w-tw-10:y=10:box=1:boxcolor=black@0.5:boxborderw=4:text='{name[0]}'\" "

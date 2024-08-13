@@ -166,10 +166,10 @@ async def incoming_compress_message_f(update):
 
 
             # Resize the thumbnail to a 16:9 aspect ratio (320x180)
-            if os.path.exists(thumb_image_path):
-                img = Image.open(thumb_image_path)
-                img = img.resize((320, 180))  # Resize to 320x180 pixels
-                img.save(thumb_image_path)
+            # if os.path.exists(thumb_image_path):
+            #     img = Image.open(thumb_image_path)
+            #     img = img.resize((320, 180))  # Resize to 320x180 pixels
+            #     img.save(thumb_image_path)
 
             upload_start = await bot.send_message(chat_id, f"**Uploading Video ...** \n\nProcess Started at `{now}`")
             await sent_message.edit_text(                    
@@ -187,7 +187,7 @@ async def incoming_compress_message_f(update):
                 caption=file_name_without_extension,  # Use the file name as the caption
                 duration=duration,
                 #thumb=thumb_image_path,
-                thumb=thumb.jpg,
+                thumb="thumb.jpg",
                 width=1280,  # Set the width of the video
                 height=720,  # Set the height of the video
                 reply_to_message_id=update.id,

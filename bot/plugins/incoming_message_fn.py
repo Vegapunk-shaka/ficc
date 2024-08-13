@@ -32,8 +32,6 @@ logging.basicConfig(
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 LOGGER = logging.getLogger(__name__)
 
-os.system("wget https://graph.org/file/fb8fec6399fcc10a8df9f.jpg -O thumb.jpg")
-
 CURRENT_PROCESSES = {}
 CHAT_FLOOD = {}
 broadcast_ids = {}

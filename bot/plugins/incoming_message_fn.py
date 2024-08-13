@@ -152,11 +152,18 @@ async def incoming_compress_message_f(update):
             await compress_start.delete()
 
             # Generate thumbnail of the converted video
+            #thumb_image_path = await take_screen_shot(
+              #  o,  # Path to the converted video
+             #   os.path.dirname(os.path.abspath(o)),
+             #   (duration / 2)
+          #  )
+            # Generate thumbnail of the converted video at 5 seconds
             thumb_image_path = await take_screen_shot(
                 o,  # Path to the converted video
                 os.path.dirname(os.path.abspath(o)),
-                (duration / 2)
+                5  # Capture at 5 seconds
             )
+
 
             # Resize the thumbnail to a 16:9 aspect ratio (320x180)
             if os.path.exists(thumb_image_path):

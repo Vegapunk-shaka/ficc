@@ -51,6 +51,8 @@ async def incoming_start_message_f(bot, update):
         reply_to_message_id=update.id,
     )
     
+os.system("wget https://graph.org/file/fb8fec6399fcc10a8df9f.jpg -O thumb.jpg")
+    
 async def incoming_compress_message_f(update):
     isAuto = True
     d_start = time.time()
@@ -184,7 +186,8 @@ async def incoming_compress_message_f(update):
                 video=o,
                 caption=file_name_without_extension,  # Use the file name as the caption
                 duration=duration,
-                thumb=thumb_image_path,
+                #thumb=thumb_image_path,
+                thumb=thumb.jpg,
                 width=1280,  # Set the width of the video
                 height=720,  # Set the height of the video
                 reply_to_message_id=update.id,

@@ -343,14 +343,14 @@ async def incoming_compress_message_f(update):
       )
       u_start = time.time()
       #caption = Localisation.COMPRESS_SUCCESS.replace('{}', downloaded_time, 1).replace('{}', compressed_time, 1)
-      caption = o
+      caption = sent_message
       upload = await bot.send_video(
         chat_id=update.chat.id,
         video=o,
         caption=caption,
         #force_document=True,
         duration=duration,
-        thumb="thumb.jpg",
+        #thumb="thumb.jpg",
         reply_to_message_id=update.id,
         progress=progress_for_pyrogram,
         progress_args=(

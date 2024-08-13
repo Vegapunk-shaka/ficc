@@ -185,6 +185,8 @@ async def incoming_compress_message_f(update):
                 caption=file_name_without_extension,  # Use the file name as the caption
                 duration=duration,
                 thumb=thumb_image_path,
+                width=1280,  # Set the width of the video
+                height=720,  # Set the height of the video
                 reply_to_message_id=update.id,
                 progress=progress_for_pyrogram,
                 progress_args=(

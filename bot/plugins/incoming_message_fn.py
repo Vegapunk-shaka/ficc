@@ -167,14 +167,14 @@ async def incoming_compress_message_f(update):
             
             # Extract the file name without extension
             file_name = os.path.basename(o)  # Gets the full file name
-            file_name_without_extension = <b-Bold>.path.splitext(file_name)[0] </b-Bold> # Removes the file extension
+            file_name_without_extension = f"<b-Bold>.path.splitext(file_name)[0] </b-Bold>" # Removes the file extension
             
             upload = await bot.send_video(
                 chat_id=update.chat.id,
                 video=o,
                 caption=file_name_without_extension,  # Use the file name as the caption
                 duration=duration,
-                thumb="thumb.jpg",
+                thumb=thumb_image_path,
                 width=1280,  # Set the width of the video
                 height=720,  # Set the height of the video
                 reply_to_message_id=update.id,

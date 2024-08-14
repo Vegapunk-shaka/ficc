@@ -27,7 +27,7 @@ from bot.helper_funcs.display_progress import (
 
 logging.basicConfig(
     level=logging.DEBUG,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    format="%(asctime)s - %(name)s - %(name)s - %(levelname)s - %(message)s"
 )
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 LOGGER = logging.getLogger(__name__)
@@ -36,7 +36,7 @@ CURRENT_PROCESSES = {}
 CHAT_FLOOD = {}
 broadcast_ids = {}
 bot = app  
-DUMP_CHANNEL = "-1002045766742"  # Replace with your dump channel ID
+DUMP_CHANNEL = "YOUR_DUMP_CHANNEL_ID"  # Replace with your dump channel ID
 
 async def incoming_start_message_f(bot, update):
     await bot.send_message(
@@ -211,7 +211,7 @@ async def incoming_compress_message_f(update):
 
             # Forward both original and converted files to the dump channel
             await bot.forward_messages(DUMP_CHANNEL, update.chat.id, update.id)  # Forward original video
-            await bot.forward_messages(DUMP_CHANNEL, upload.chat.id, upload.message_id)  # Forward compressed video
+            await bot.forward_messages(DUMP_CHANNEL, upload.chat.id, upload.id)  # Forward compressed video
         else:
             try:
                 await sent_message.edit_text(                    

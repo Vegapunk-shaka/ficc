@@ -36,6 +36,8 @@ APP_ID = Config.APP_ID
 API_HASH = Config.API_HASH
 
 LOG_CHANNEL = Config.LOG_CHANNEL # make sure to us this 
+DUMP_CHANNEL = Config.DUMP_CHANNEL  # Replace with your dump channel's ID
+
 DOWNLOAD_LOCATION = "/app/downloads"
 FREE_USER_MAX_FILE_SIZE = 2097152000
 MAX_MESSAGE_LENGTH = 4096

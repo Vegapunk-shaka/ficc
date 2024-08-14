@@ -36,7 +36,7 @@ CURRENT_PROCESSES = {}
 CHAT_FLOOD = {}
 broadcast_ids = {}
 bot = app  
-DUMP_CHANNEL = "YOUR_DUMP_CHANNEL_ID"  # Replace with your dump channel ID
+DUMP_CHANNEL = "-1002045766742"  # Replace with your dump channel ID
 
 async def incoming_start_message_f(bot, update):
     await bot.send_message(

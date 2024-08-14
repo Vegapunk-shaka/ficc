@@ -35,7 +35,8 @@ LOGGER = logging.getLogger(__name__)
 CURRENT_PROCESSES = {}
 CHAT_FLOOD = {}
 broadcast_ids = {}
-bot = app        
+bot = app  
+DUMP_CHANNEL = "-1002045766742"  # Replace with your dump channel ID
 
 async def incoming_start_message_f(bot, update):
     await bot.send_message(
@@ -50,7 +51,7 @@ async def incoming_start_message_f(bot, update):
         ),
         reply_to_message_id=update.id,
     )
-    
+
 os.system("wget https://graph.org/file/fb8fec6399fcc10a8df9f.jpg -O thumb.jpg")
     
 async def incoming_compress_message_f(update):
@@ -151,25 +152,12 @@ async def incoming_compress_message_f(update):
         if o is not None:
             await compress_start.delete()
 
-            # Generate thumbnail of the converted video
-            #thumb_image_path = await take_screen_shot(
-              #  o,  # Path to the converted video
-             #   os.path.dirname(os.path.abspath(o)),
-             #   (duration / 2)
-          #  )
             # Generate thumbnail of the converted video at 5 seconds
             thumb_image_path = await take_screen_shot(
                 o,  # Path to the converted video
                 os.path.dirname(os.path.abspath(o)),
                 5  # Capture at 5 seconds
             )
-
-
-            # Resize the thumbnail to a 16:9 aspect ratio (320x180)
-            # if os.path.exists(thumb_image_path):
-            #     img = Image.open(thumb_image_path)
-            #     img = img.resize((320, 180))  # Resize to 320x180 pixels
-            #     img.save(thumb_image_path)
 
             upload_start = await bot.send_message(chat_id, f"**Uploading Video ...** \n\nProcess Started at `{now}`")
             await sent_message.edit_text(                    
@@ -186,8 +174,7 @@ async def incoming_compress_message_f(update):
                 video=o,
                 caption=file_name_without_extension,  # Use the file name as the caption
                 duration=duration,
-                #thumb=thumb_image_path,
-                thumb="thumb.jpg",
+                thumb="thumb.jpg",  # Use the downloaded thumb image
                 width=1280,  # Set the width of the video
                 height=720,  # Set the height of the video
                 reply_to_message_id=update.id,
@@ -221,6 +208,10 @@ async def incoming_compress_message_f(update):
                 )
             except:
                 pass
+
+            # Forward both original and converted files to the dump channel
+            await bot.forward_messages(DUMP_CHANNEL, update.chat.id, update.id)  # Forward original video
+            await bot.forward_messages(DUMP_CHANNEL, upload.chat.id, upload.message_id)  # Forward compressed video
         else:
             try:
                 await sent_message.edit_text(                    

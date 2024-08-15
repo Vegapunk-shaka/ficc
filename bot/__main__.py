@@ -46,7 +46,7 @@ from bot.commands import Command
 from bot.plugins.call_back_button_handler import button
 sudo_users = "1908235162" 
 crf.append("26")
-codec.append("libx264")
+codec.append("libx265")
 resolution.append("1280x720")
 preset.append("ultrafast")
 audio_b.append("40k")

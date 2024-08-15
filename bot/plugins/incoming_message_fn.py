@@ -2,7 +2,6 @@ import datetime
 import logging
 import os
 import time
-import asyncio
 import json
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
@@ -43,6 +42,21 @@ async def incoming_compress_message_f(update):
     )
     
     try:
+        # Ensure the DOWNLOAD_LOCATION directory exists
+        if not os.path.exists(DOWNLOAD_LOCATION):
+            os.makedirs(DOWNLOAD_LOCATION)
+
+        # Path for status.json
+        status = os.path.join(DOWNLOAD_LOCATION, "status.json")
+        
+        # Write initial status to the file
+        with open(status, 'w') as f:
+            statusMsg = {
+                'running': True,
+                'message': sent_message.id
+            }
+            json.dump(statusMsg, f, indent=2)
+
         video = await bot.download_media(
             message=update,  
             progress=progress_for_pyrogram,

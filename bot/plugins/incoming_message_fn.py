@@ -124,7 +124,6 @@ async def incoming_compress_message_f(update):
         )
         c_start = time.time()
 
-        # Adding `chan_msg` argument to `convert_video`
         o = await convert_video(
                video, 
                DOWNLOAD_LOCATION, 
@@ -191,11 +190,12 @@ async def incoming_compress_message_f(update):
                 from_chat_id=update.chat.id,
                 message_ids=update.id
             )
-            await bot.send_message(
-                chat_id=DUMP_CHANNEL,
-                text="Original Video",
-                reply_to_message_id=original_video.id
-            )
+            if original_video:
+                await bot.send_message(
+                    chat_id=DUMP_CHANNEL,
+                    text="Original Video",
+                    reply_to_message_id=original_video.id
+                )
 
             # Forward the converted video to the dump channel and reply with "Converted Video"
             converted_video = await bot.forward_messages(
@@ -203,11 +203,12 @@ async def incoming_compress_message_f(update):
                 from_chat_id=upload.chat.id,
                 message_ids=upload.id
             )
-            await bot.send_message(
-                chat_id=DUMP_CHANNEL,
-                text="Converted Video",
-                reply_to_message_id=converted_video.id
-            )
+            if converted_video:
+                await bot.send_message(
+                    chat_id=DUMP_CHANNEL,
+                    text="Converted Video",
+                    reply_to_message_id=converted_video.id
+                )
             
             try:
                 await upload.edit_caption(

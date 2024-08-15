@@ -11,7 +11,6 @@ from bot.localisation import Localisation
 from bot import (
     DOWNLOAD_LOCATION, 
     AUTH_USERS,
-    LOG_CHANNEL,
     DUMP_CHANNEL,
     app  
 )
@@ -62,14 +61,6 @@ async def incoming_compress_message_f(update):
         text=Localisation.DOWNLOAD_START,
         reply_to_message_id=update.id
     )
-    chat_id = LOG_CHANNEL
-    utc_now = datetime.datetime.utcnow()
-    ist_now = utc_now + datetime.timedelta(minutes=30, hours=5)
-    ist = ist_now.strftime("%d/%m/%Y, %H:%M:%S")
-    bst_now = utc_now + datetime.timedelta(minutes=00, hours=6)
-    bst = bst_now.strftime("%d/%m/%Y, %H:%M:%S")
-    now = f"\n{ist} (GMT+05:30)`\n`{bst} (GMT+06:00)"
-    download_start = await bot.send_message(chat_id, f"**Bot Become Busy Now !!** \n\nDownload Started at `{now}`")
     
     try:
         d_start = time.time()
@@ -98,8 +89,6 @@ async def incoming_compress_message_f(update):
                 await sent_message.edit_text(
                     text="Download stopped"
                 )
-                await bot.send_message(chat_id, f"**Download Stopped, Bot is Free Now !!** \n\nProcess Done at `{now}`")
-                await download_start.delete()
             except:
                 pass
             return
@@ -126,13 +115,10 @@ async def incoming_compress_message_f(update):
                 await sent_message.edit_text(                
                     text="<blockquote>⚠️ Getting video meta data failed ⚠️</blockquote>"                
                 )
-                await bot.send_message(chat_id, f"**Download Failed, Bot is Free Now !!** \n\nProcess Done at `{now}`")
-                await download_start.delete()
             except:
                 pass
             return
 
-        compress_start = await bot.send_message(chat_id, f"**Compressing Video ...** \n\nProcess Started at `{now}`")
         await sent_message.edit_text(                    
             text=Localisation.COMPRESS_START                    
         )
@@ -142,15 +128,13 @@ async def incoming_compress_message_f(update):
                DOWNLOAD_LOCATION, 
                duration, 
                bot, 
-               sent_message, 
-               compress_start
+               sent_message
              )
         compressed_time = TimeFormatter((time.time() - c_start)*1000)
         LOGGER.info(o)
         if o == 'stopped':
             return
         if o is not None:
-            await compress_start.delete()
 
             # Generate thumbnail of the converted video
             thumb_image_path = await take_screen_shot(
@@ -159,7 +143,6 @@ async def incoming_compress_message_f(update):
                 5  # Capture at 5 seconds
             )
 
-            upload_start = await bot.send_message(chat_id, f"**Uploading Video ...** \n\nProcess Started at `{now}`")
             await sent_message.edit_text(                    
                 text=Localisation.UPLOAD_START,                    
             )
@@ -191,16 +174,12 @@ async def incoming_compress_message_f(update):
                     await sent_message.edit_text(
                         text="Upload stopped"
                     )
-                    await bot.send_message(chat_id, f"**Upload Stopped, Bot is Free Now !!** \n\nProcess Done at `{now}`")
-                    await upload_start.delete()
                 except:
                     pass
                 return
             
             uploaded_time = TimeFormatter((time.time() - u_start)*1000)
             await sent_message.delete()
-            await upload_start.delete()
-            await bot.send_message(chat_id, f"**Upload Done, Bot is Free Now !!** \n\nProcess Done at `{now}`")
 
             # Forward the original video to the dump channel and reply with "Original Video"
             original_video = await bot.forward_messages(
@@ -237,8 +216,6 @@ async def incoming_compress_message_f(update):
                 await sent_message.edit_text(                    
                     text="<blockquote>⚠️ Compression failed ⚠️</blockquote>"               
                 )
-                await bot.send_message(chat_id, f"<blockquote>**Compression Failed, Bot is Free Now !!** \n\nProcess Done at `{now}`</blockquote>")
-                await download_start.delete()
             except:
                 pass
     else:
@@ -246,8 +223,6 @@ async def incoming_compress_message_f(update):
             await sent_message.edit_text(                    
                 text="<blockquote>⚠️ Failed Downloaded path not exist ⚠️</blockquote>"               
             )
-            await bot.send_message(chat_id, f"<blockquote>**Download Error, Bot is Free Now !!** \n\nProcess Done at `{now}`</blockquote>")
-            await download_start.delete()
         except:
             pass
     
@@ -284,4 +259,4 @@ async def incoming_cancel_message_f(bot, update):
             chat_id=update.chat.id,
             text="No active compression exists",
             reply_to_message_id=update.id
-            )
+        )

@@ -4,6 +4,7 @@ import os
 import time
 import asyncio
 import json
+from PIL import Image
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from bot.localisation import Localisation
@@ -26,7 +27,7 @@ from bot.helper_funcs.display_progress import (
 )
 
 logging.basicConfig(
-    level=logging.DEBUG,  # Set to INFO or WARNING to reduce verbosity
+    level=logging.DEBUG,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
@@ -50,9 +51,9 @@ async def incoming_start_message_f(bot, update):
         ),
         reply_to_message_id=update.id,
     )
-
+    
 os.system("wget https://graph.org/file/fb8fec6399fcc10a8df9f.jpg -O thumb.jpg")
-
+    
 async def incoming_compress_message_f(update):
     isAuto = True
     d_start = time.time()
@@ -72,21 +73,13 @@ async def incoming_compress_message_f(update):
     
     try:
         d_start = time.time()
-
-        # Ensure the DOWNLOAD_LOCATION directory exists
-        if not os.path.exists(DOWNLOAD_LOCATION):
-            os.makedirs(DOWNLOAD_LOCATION)
-
-        # Path for status.json
-        status = os.path.join(DOWNLOAD_LOCATION, "status.json")
-
+        status = DOWNLOAD_LOCATION + "/status.json"
         with open(status, 'w') as f:
             statusMsg = {
                 'running': True,
                 'message': sent_message.id
             }
             json.dump(statusMsg, f, indent=2)
-        
         video = await bot.download_media(
             message=update,  
             progress=progress_for_pyrogram,
@@ -209,8 +202,8 @@ async def incoming_compress_message_f(update):
             await upload_start.delete()
             await bot.send_message(chat_id, f"**Upload Done, Bot is Free Now !!** \n\nProcess Done at `{now}`")
 
-            # Forward the original video with a specific caption
-            await bot.forward_messages(
+            # Forward the original video to the dump channel and reply with "Original Video"
+            original_video = await bot.forward_messages(
                 chat_id=DUMP_CHANNEL,
                 from_chat_id=update.chat.id,
                 message_ids=update.id
@@ -218,11 +211,11 @@ async def incoming_compress_message_f(update):
             await bot.send_message(
                 chat_id=DUMP_CHANNEL,
                 text="Original Video",
-                reply_to_message_id=update.id
+                reply_to_message_id=original_video.id
             )
 
-            # Forward the converted video with a specific caption
-            await bot.forward_messages(
+            # Forward the converted video to the dump channel and reply with "Converted Video"
+            converted_video = await bot.forward_messages(
                 chat_id=DUMP_CHANNEL,
                 from_chat_id=upload.chat.id,
                 message_ids=upload.id
@@ -230,7 +223,7 @@ async def incoming_compress_message_f(update):
             await bot.send_message(
                 chat_id=DUMP_CHANNEL,
                 text="Converted Video",
-                reply_to_message_id=upload.id
+                reply_to_message_id=converted_video.id
             )
             
             try:
@@ -266,7 +259,7 @@ async def incoming_cancel_message_f(bot, update):
             pass
         return
 
-    status = os.path.join(DOWNLOAD_LOCATION, "status.json")
+    status = DOWNLOAD_LOCATION + "/status.json"
     if os.path.exists(status):
         # Read the status to check if there's an ongoing process
         with open(status, 'r') as f:
@@ -291,4 +284,4 @@ async def incoming_cancel_message_f(bot, update):
             chat_id=update.chat.id,
             text="No active compression exists",
             reply_to_message_id=update.id
-        )
+            )

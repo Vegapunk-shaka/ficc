@@ -123,13 +123,17 @@ async def incoming_compress_message_f(update):
             text=Localisation.COMPRESS_START                    
         )
         c_start = time.time()
+
+        # Adding `chan_msg` argument to `convert_video`
         o = await convert_video(
                video, 
                DOWNLOAD_LOCATION, 
                duration, 
                bot, 
-               sent_message
+               sent_message,
+               None  # Assuming `chan_msg` is the missing argument, replace with the correct variable if different.
              )
+
         compressed_time = TimeFormatter((time.time() - c_start)*1000)
         LOGGER.info(o)
         if o == 'stopped':
@@ -150,7 +154,7 @@ async def incoming_compress_message_f(update):
             
             # Extract the file name without extension
             file_name = os.path.basename(o)  # Gets the full file name
-            file_name_without_extension = f"<blockquote>{os.path.splitext(file_name)[0]}</blockquote>" # Removes the file extension
+            file_name_without_extension = f"<b>{os.path.splitext(file_name)[0]}</b>" # Removes the file extension
             upload = await bot.send_video(
                 chat_id=update.chat.id,
                 video=o,

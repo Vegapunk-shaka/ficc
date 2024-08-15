@@ -7,7 +7,7 @@ class Config(object):
     APP_ID = int(get_config("APP_ID", "20524455"))
     API_HASH = get_config("API_HASH", "03f1c29714a7ce9ed1819318427ea281")
     LOG_CHANNEL = get_config("LOG_CHANNEL", "-1002045766742")
-    DUMP_CHANNEL = get_config("DUMP_CHANNEL", "-1002045766742") # Replace with your dump channel's ID
+    DUMP_CHANNEL = get_config("DUMP_CHANNEL", "-1002151759335") # Replace with your dump channel's ID
 
     UPDATES_CHANNEL = get_config("UPDATES_CHANNEL", None) # Without `@` LOL
      # Get these values from my.telegram.org

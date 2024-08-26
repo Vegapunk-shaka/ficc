@@ -47,17 +47,17 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
     ##-hide_banner -loglevel quiet 
     crf.append("26")
     codec.append("libx265")
-    resolution.append("1280x720")
+    resolution.append("640x360")
     preset.append("ultrafast")
     audio_b.append("40k")
     name.append("Owner of this video is free edu care")
-    size.append("18")
+    size.append("7")
     file_genertor_command = (
     f"ffmpeg -hide_banner -loglevel quiet -progress '{progress}' -i '{video_file}' -i abc.png "
     f"-metadata 'title=Encoded by @zoro_is_robot' -c:v libx265 -map 0 -crf {crf[0]} -c:s copy -pix_fmt yuv420p "
     f"-s {resolution[0]} -b:v 300k -c:a libopus -b:a {audio_b[0]} -preset {preset[0]} "
     f"-metadata:s:v 'title=@zoro_is_robot' -metadata:s:a 'title=@zoro_is_robot' -metadata:s:s 'title=@zoro_is_robot' "
-    f"-filter_complex \"[1:v] scale=80:80 [logo]; [0:v][logo] overlay=10:10,drawtext=fontfile=font.ttf:fontsize={size[0]}:fontcolor=white:bordercolor=black@0.50:x=w-tw-10:y=10:box=1:boxcolor=black@0.5:boxborderw=4:text='{name[0]}'\" "
+    f"-filter_complex \"[1:v] scale=30:30 [logo]; [0:v][logo] overlay=10:10,drawtext=fontfile=font.ttf:fontsize={size[0]}:fontcolor=white:bordercolor=black@0.50:x=w-tw-10:y=10:box=1:boxcolor=black@0.5:boxborderw=4:text='{name[0]}'\" "
     f"-pass 1 '{out_put_file_name}' -y"
 )
     #file_genertor_command = f"ffmpeg -hide_banner -loglevel quiet -progress '{progress}' -y -vsync 0 -hwaccel cuda -hwaccel_output_format cuda -i '{video_file}' -c:v h264_nvenc -map 0 -crf {crf[0]} -c:s copy  -s {resolution[0]} -b:v copy -c:a copy -preset p2  '{out_put_file_name}' -y"

@@ -27,8 +27,7 @@ class Config(object):
     # Telegram maximum file upload size
     BOT_USERNAME = get_config("BOT_USERNAME", "ungabungabu_Three_robot")         ##main bot-Ungabungabu
    # BOT_USERNAME = get_config("BOT_USERNAME", "ungabungaa_robot")      #watermarker bot
-    BOT_USERNAME = get_config("BOT_USERNAME", "ungabungabu_Two_robot")         ##main bot-Ungabungabu
-   #
+    
     MAX_FILE_SIZE = 2097152000
     TG_MAX_FILE_SIZE = 2097152000
     FREE_USER_MAX_FILE_SIZE = 2097152000

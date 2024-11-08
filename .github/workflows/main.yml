@@ -1,0 +1,70 @@
+name: Run Docker Container
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  mail: ${{ secrets.GITHUBMAIL }}
+  username: ${{ secrets.GITHUBNAME }}
+
+jobs:
+  run-docker-app:
+    name: Build and Run Docker Container
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build Docker Image
+        run: |
+          docker build -t my-app-image .
+
+      - name: Run Docker Container
+        run: |
+          docker run -d --name my-running-app my-app-image
+
+      - name: Keep the container running
+        timeout-minutes: 300
+        run: |
+          echo "Container will run for 6 hours..."
+          sleep $((5 * 60 * 60))
+
+      - name: Show Docker Logs on Failure
+        if: failure()
+        run: |
+          docker logs my-running-app
+
+      - name: Cleanup Docker Container
+        if: always()
+        run: |
+          docker stop my-running-app
+          docker rm my-running-app
+
+  send_notification:
+    name: Notify Telegram
+    needs: run-docker-app
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    steps:
+      - name: Send Telegram Notification
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: |
+          DATE=$(date)
+          OS_INFO=$(uname -srm)
+          REPO_URL="https://github.com/${{ github.repository }}"
+          COMMIT_LINK="${REPO_URL}/commit/${{ github.sha }}"
+          MESSAGE="<b>Run Docker Container Workflow Completed Successfully!</b>
+          <b>Branch:</b> ${{ github.ref_name }}
+          <b>Commit:</b> <a href='$COMMIT_LINK'>${{ github.sha }}</a>
+          <b>Date:</b> $DATE
+          <b>System:</b> $OS_INFO"
+          curl -X POST \
+            https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \
+            -d chat_id=${CHAT_ID} \
+            -d parse_mode=HTML \
+            -d text="$MESSAGE"
